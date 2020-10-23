@@ -1,6 +1,6 @@
 import React from 'react';
 import Record from './Record';
-import { records } from '../services/index'
+import { login, records } from '../services/index'
 
 class Recordlist extends React.Component {
     constructor(props){
@@ -11,7 +11,10 @@ class Recordlist extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = async() => {
+        // this.getRecords()
+        const user = await login({username: "jro", password:'1234'})
+        console.log(user)
         this.getRecords()
     }
 
@@ -19,7 +22,7 @@ class Recordlist extends React.Component {
         const resp = await records()
         console.log(resp)
         this.setState({
-            
+            recordData: resp.results
         })
     }
 
